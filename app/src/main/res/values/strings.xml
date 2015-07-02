@@ -1,3 +1,56 @@
 <resources>
-    <string name="app_name">IndianTextile Magazine</string>
+    <string name="app_name">"IndianTextileMagazine"</string>
+    <string name="splashScreenTitle">IndianTextileMagazine</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="splashScreenImageDescription">This is the splash screen Image</string>
+    <string name="title_activity_article_list">IndianTextileMagazine</string>
+
+
+    <string name="title_section1">Featured Articles</string>
+    <string name="title_section2">Trucks</string>
+    <string name="title_section3">Buses</string>
+    <string name="title_section4">Construction Equipment</string>
+    <string name="title_section5">Applications</string>
+    <string name="title_section6">Components</string>
+    <string name="title_section7">Aftermarket</string>
+    <string name="title_section8">Tyres</string>
+    <string name="title_section9">Lubes &amp; Fuels</string>
+    <string name="title_section10">Batteries</string>
+    <string name="title_section11">Technology</string>
+    <string name="title_section12">Logistics</string>
+    <string name="title_section13">Dealer Corner</string>
+    <string name="title_section14">Bazaar Talk</string>
+    <string name="title_section15">CSR Initiative</string>
+    <string name="title_section16">Events</string>
+
+    <string name="title_section17">Impact Feature</string>
+
+    <string name="title_section18">Catalogs/Brochures</string>
+    <string name="title_section19">Subscribe</string>
+
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example"> </string>
+    <string name="title_activity_gcmregister">Register for Notifications</string>
+    <string name="fullname_GCMRegistration">Full Name</string>
+    <string name="emailID_GCMRegistration">Email ID</string>
+    <string name="register">REGISTER</string>
+    <string name="enterEmailID">enter valid Email ID here</string>
+    <string name="enterName">enter Name here</string>
+    <string name="server_unregister_error">Unable to register</string>
+    <string name="gcm_unregistered">The device is unregistered</string>
+    <string name="gcm_deleted">Notifications have been deleted</string>
+    <string name="row_image_description">The image corresponding to the Article Title</string>
+    <string name="title_activity_display_article">DisplayArticle</string>
+    <string name="advertisement">Advertisement shown at the bottom</string>
+    <string name="title_activity_main_menu">Motor India</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
