@@ -1,6 +1,7 @@
 package in.indiantextilemagazine.indiantextilemagazine.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import in.indiantextilemagazine.indiantextilemagazine.R;
+import in.indiantextilemagazine.indiantextilemagazine.Utilities.TextileIndiaPreferences;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
@@ -37,7 +39,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getPosition() + " clicked.");
-                    Log.i(TAG, Integer.toString(articleJSONArray.length()));
+                    try {
+                        String articleID = articleJSONArray.getJSONObject(getPosition()).getString("id");
+                        String articleTitle = articleJSONArray.getJSONObject(getPosition()).getString("title");
+                        String imageURL = articleJSONArray.getJSONObject(getPosition()).getString("image");
+                        Log.i(TAG,"the id of the article is"+articleID);
+                        Intent intent = new Intent(c,DisplayArticle.class);
+                        intent.putExtra(TextileIndiaPreferences.ARTICLE_ID, articleID);
+                        intent.putExtra(TextileIndiaPreferences.ARTICLE_TITLE, articleTitle);
+                        intent.putExtra(TextileIndiaPreferences.IMAGE_URL, imageURL);
+                        c.startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             textView = (TextView) v.findViewById(R.id.articleTitle);

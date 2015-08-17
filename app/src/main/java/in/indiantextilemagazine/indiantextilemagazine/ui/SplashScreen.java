@@ -83,8 +83,8 @@ public class SplashScreen extends ActionBarActivity {
 
                 SharedPreferences prefs = getSharedPreferences(TextileIndiaPreferences.GENERAL_DATA, MODE_PRIVATE);
                 final Boolean GCMRegistered = prefs.getBoolean(TextileIndiaPreferences.GCM_REGISTRATION_STATUS, false);
-
-                if (GCMRegistered) {
+                //TODO CHANGE TO
+                if (true) {
                     Log.i(TAG, "GCM is registered, going to HOME activity");
                     Intent myIntent = new Intent(SplashScreen.this, MainMenu.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

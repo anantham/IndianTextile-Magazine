@@ -15,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/splashScreenImageDescription"
-        android:src="@drawable/splashscreen"/>
+        android:src="@drawable/tm_transparent"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
