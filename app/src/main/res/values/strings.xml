@@ -8,30 +8,26 @@
 
 
     <string name="title_section1">Featured Articles</string>
-    <string name="title_section2">Trucks</string>
-    <string name="title_section3">Buses</string>
-    <string name="title_section4">Construction Equipment</string>
-    <string name="title_section5">Applications</string>
-    <string name="title_section6">Components</string>
-    <string name="title_section7">Aftermarket</string>
-    <string name="title_section8">Tyres</string>
-    <string name="title_section9">Lubes &amp; Fuels</string>
-    <string name="title_section10">Batteries</string>
-    <string name="title_section11">Technology</string>
-    <string name="title_section12">Logistics</string>
-    <string name="title_section13">Dealer Corner</string>
-    <string name="title_section14">Bazaar Talk</string>
-    <string name="title_section15">CSR Initiative</string>
-    <string name="title_section16">Events</string>
+    <string name="title_section2">Spinning</string>
+    <string name="title_section3">Weaving</string>
+    <string name="title_section4">Knitting</string>
+    <string name="title_section5">Dyeing</string>
+    <string name="title_section6">Processing</string>
+    <string name="title_section7">Printing</string>
+    <string name="title_section8">Garmenting</string>
+    <string name="title_section9">Corporate News</string>
+    <string name="title_section10">Industry News</string>
+    <string name="title_section11">Fibre</string>
+    <string name="title_section12">Finishing</string>
+    <string name="title_section13">Textile components</string>
+    <string name="title_section14">Technical Textiles</string>
+    <string name="title_section15">Events &amp; Exhibitions</string>
+    <string name="title_section16">ITMA</string>
 
-    <string name="title_section17">Impact Feature</string>
-
-    <string name="title_section18">Catalogs/Brochures</string>
-    <string name="title_section19">Subscribe</string>
 
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
         send downstream messages to this app.</string>
-    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="registering_message">Generating InstanceID token…</string>
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
@@ -53,4 +49,8 @@
     <string name="advertisement">Advertisement shown at the bottom</string>
     <string name="title_activity_main_menu">Motor India</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="pref_notification">Enable Push Notifications</string>
+    <string name="pref_notification_summ">Get notifications whenever new featured articles are released</string>
+    <string name="image">Banner image</string>
+    <string name="imagearticle">Main image of the article</string>
 </resources>

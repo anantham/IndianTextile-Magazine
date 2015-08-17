@@ -19,4 +19,6 @@ public class TextileIndiaPreferences {
     public static final String  ARTICLE_ID = "in.indiantextilemagazine.indiantextilemagazine.ARTICLE_ID";
     public static final String  ARTICLE_TITLE = "in.indiantextilemagazine.indiantextilemagazine.ARTICLE_TITLE";
     public static final String  IMAGE_URL = "in.indiantextilemagazine.indiantextilemagazine.IMAGE_URL";
+    public static final String  KEY_PREF_NOTIFICATION = "in.indiantextilemagazine.indiantextilemagazine.KEY_PREF_NOTIFICATION";
+    public static final String  BANNER_JSON_ARRAY = "in.indiantextilemagazine.indiantextilemagazine.BANNER_JSON_ARRAY";
 }

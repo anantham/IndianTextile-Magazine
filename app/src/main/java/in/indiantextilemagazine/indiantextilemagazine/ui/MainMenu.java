@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -38,8 +39,9 @@ public class MainMenu extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,RetrieveJSON.MyCallbackInterface {
 
     private static final int START_INDEX = 1;
-    private static final int END_INDEX = 20;
+    private static int END_INDEX = 20;
     String url = CommonData.SITE_URL;
+    public static int currentPositionCategory;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -52,6 +54,7 @@ public class MainMenu extends ActionBarActivity
     private CharSequence mTitle;
 
     public static final String TAG = "Main Menu";
+    public static MainMenu context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +69,16 @@ public class MainMenu extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        Log.i("BANNER", "started to fetch");
+        //Now itself get the banner URL etc
+        new RetrieveJSON(this).execute("http://motorindiaonline.in/mobapp/banner/api.php?action=fetch_imgs");
+        context = this;
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        currentPositionCategory = position;
         /*update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -77,84 +86,63 @@ public class MainMenu extends ActionBarActivity
                 .commit();
         */
 
-        //TODO never hardcode
-        if(position == 17 || position == 18){
-            // set the URL to which the user is sent to when he clicks on the image
-            if(position == 17){
-                url = "http://www.motorindiaonline.in/catalogs-brochures/";
-            }
-            if(position == 18){
-                url = "http://www.motorindiaonline.in/subscribe/";
-            }
-
-            Log.i(TAG,"you will be shown a image");
-            // Create a new fragment and replace container
-            Fragment fragment = new ImageFragment();
-            Bundle args = new Bundle();
-            args.putInt(TextileIndiaPreferences.CATEGORY_NUMBER, position);
-            fragment.setArguments(args);
-
-            // Insert the fragment by replacing any existing fragment
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
+        //TODO never hardcode But this happens if 15 is clicked
+        if(position == 15){
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://www.indiantextilemagazine.in/itma-2015/"));
+            startActivity(i);
+            Log.i(TAG,"you sre directed to Browser");
             return;
         }
-        String link = "http://motorindiaonline.in/mobapp/?s_i="+Integer.toString(START_INDEX)+"&e_i="+Integer.toString(END_INDEX)+"&cat_i=";
+
+        String link = CommonData.SITE_URL+"mobapp/?s_i="+Integer.toString(START_INDEX)+"&e_i="+Integer.toString(END_INDEX)+"&cat_i=";
 
         // Start fetching content for the list
-        switch (position){
+        switch (position) {
             case 0:
-                link = link +"featured";
+                link = link + "featured";
                 break;
             case 1:
-                link = link +"trucks";
+                link = link + "spinning";
                 break;
             case 2:
-                link = link +"buses";
+                link = link + "weaving";
                 break;
             case 3:
-                link = link +"construction-equipment";
+                link = link + "knitting";
                 break;
             case 4:
-                link = link +"applications";
+                link = link + "dyeing";
                 break;
             case 5:
-                link = link +"component";
+                link = link + "processing";
                 break;
             case 6:
-                link = link +"aftermarket";
+                link = link + "textile-printing";
                 break;
             case 7:
-                link = link +"tyres";
+                link = link + "garmenting";
                 break;
             case 8:
-                link = link +"lubes-fuels";
+                link = link + "corporate-news";
                 break;
             case 9:
-                link = link +"batteries";
+                link = link + "industry-news";
                 break;
             case 10:
-                link = link +"technology";
+                link = link + "fibre";
                 break;
             case 11:
-                link = link +"logistics";
+                link = link + "finishing";
                 break;
             case 12:
-                link = link +"dealer-corner";
+                link = link + "textile-components";
                 break;
             case 13:
-                link = link +"bazaar-talk";
+                link = link + "technical-textiles";
                 break;
             case 14:
-                link = link +"csr-initiative-2";
-                break;
-            case 15:
-                link = link +"events";
-                break;
-            case 16:
-                link = link +"impact-feature";
+                link = link + "events-exhibitions";
                 break;
         }
 
@@ -226,15 +214,6 @@ public class MainMenu extends ActionBarActivity
             case 15:
                 mTitle = getString(R.string.title_section16);
                 break;
-            case 16:
-                mTitle = getString(R.string.title_section17);
-                break;
-            case 17:
-                mTitle = getString(R.string.title_section18);
-                break;
-            case 18:
-                mTitle = getString(R.string.title_section19);
-                break;
         }
     }
 
@@ -245,6 +224,9 @@ public class MainMenu extends ActionBarActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        //I set END_INDEX back to 15 after the user changes category
+        // otherwise the level to which he scrolled in the other categories will be fetched in the new one
+        END_INDEX = 15;
     }
 
 
@@ -270,7 +252,8 @@ public class MainMenu extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //TODO launch intent to settings page
+            Intent myIntent = new Intent(MainMenu.this, MySettings.class);
+            this.startActivity(myIntent);
             return true;
         }
 
@@ -355,63 +338,56 @@ public class MainMenu extends ActionBarActivity
             position = 14;
         } else if(mTitle == getString(R.string.title_section16)){
             position = 15;
-        } else if(mTitle == getString(R.string.title_section17)){
-            position = 16;
         }
 
-        String link = "http://motorindiaonline.in/mobapp/?s_i="+Integer.toString(START_INDEX)+"&e_i="+Integer.toString(END_INDEX)+"&cat_i=";
+        String link = CommonData.SITE_URL+"mobapp/?s_i="+Integer.toString(START_INDEX)+"&e_i="+Integer.toString(END_INDEX)+"&cat_i=";
 
-        switch (position){
+        // append slug to URL
+        switch (position) {
             case 0:
-                link = link +"featured";
+                link = link + "featured";
                 break;
             case 1:
-                link = link +"trucks";
+                link = link + "spinning";
                 break;
             case 2:
-                link = link +"buses";
+                link = link + "weaving";
                 break;
             case 3:
-                link = link +"construction-equipment";
+                link = link + "knitting";
                 break;
             case 4:
-                link = link +"applications";
+                link = link + "dyeing";
                 break;
             case 5:
-                link = link +"component";
+                link = link + "processing";
                 break;
             case 6:
-                link = link +"aftermarket";
+                link = link + "textile-printing";
                 break;
             case 7:
-                link = link +"tyres";
+                link = link + "garmenting";
                 break;
             case 8:
-                link = link +"lubes-fuels";
+                link = link + "corporate-news";
                 break;
             case 9:
-                link = link +"batteries";
+                link = link + "industry-news";
                 break;
             case 10:
-                link = link +"technology";
+                link = link + "fibre";
                 break;
             case 11:
-                link = link +"logistics";
+                link = link + "finishing";
                 break;
             case 12:
-                link = link +"dealer-corner";
+                link = link + "textile-components";
                 break;
             case 13:
-                link = link +"bazaar-talk";
+                link = link + "technical-textiles";
                 break;
             case 14:
-                link = link +"csr-initiative-2";
-                break;
-            case 15:
-                link = link +"events";
-                break;
-            case 16:
-                link = link +"impact-feature";
+                link = link + "events-exhibitions";
                 break;
         }
 
@@ -427,12 +403,40 @@ public class MainMenu extends ActionBarActivity
             requestAgain();
             return;
         }
+        //This might Also be the banner JSON array
         try {
-            String url = result.getJSONObject(result.length()-1).getString(TextileIndiaPreferences.URL_JSON);
-            Log.i(TAG,"We have received result of the request to the URL = "+url);
+            Log.i("BANNER","Checking ... ");
+            String check = result.getJSONObject(0).getString("name");
+            Log.i("BANNER",check);
+            //TODO do not hardcode JOST
+            if(check.equals("JOST")){
+                //Log.i("BANNER", "Received");
+                SharedPreferences prefs = getSharedPreferences(TextileIndiaPreferences.BANNER_JSON_ARRAY, MODE_PRIVATE);
+                //Now that we know this is the BannerJSONArray
+                SharedPreferences.Editor editor = getSharedPreferences(TextileIndiaPreferences.BANNER_JSON_ARRAY, MODE_PRIVATE).edit();
+                editor.putString("JSONData", result.toString());
+                int no = prefs.getInt("keepTrack", -1);
+                //Log.i("BANNER","The no is "+Integer.toString(no));
+                if(no == result.length()-1){
+                    editor.putInt("keepTrack",0);
+                }
+                else{
+                    editor.putInt("keepTrack",no+1);
+                }
+
+                editor.apply();
+                //Log.i("BANNER", "SAVED");
+                //Log.i("BANNER", result.toString());
+                //Log.i("BANNER", Integer.toString(no));
+                //Log.i("BANNER","The name is "+result.getJSONObject(no).getString("name")+" for the number "+Integer.toString(no));
+                //And exit
+                return;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.i("BANNER", "this is not a banner callback");
         }
+
         // Now depending on what the current screen is using mTitle we can know that
         // we need to set the data into the article fragment
         Log.i(TAG,"Replacing the existing fragment ");
@@ -450,6 +454,7 @@ public class MainMenu extends ActionBarActivity
                     .commitAllowingStateLoss();
 
         } catch (IllegalStateException e) {
+            //TODO don't replace fragment asynchronously
             Log.i(TAG,"Its cool, no activity, we don't need to perform the transaction");
         }
 
@@ -519,6 +524,7 @@ public class MainMenu extends ActionBarActivity
         protected String[] mDataset;
 
         private static int SPAN_COUNT = 1;
+        public int scrollPosition = 1;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -619,8 +625,72 @@ public class MainMenu extends ActionBarActivity
             }
 
             mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.scrollToPosition(scrollPosition);
+            int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+            mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+            mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener((GridLayoutManager) mLayoutManager) {
+                @Override
+                public void onLoadMore(int current_page) {
+                    Log.i(TAG, "Current Page is" + Integer.toString(current_page));
+                    Log.i(TAG, "fetching more");
+                    END_INDEX = END_INDEX + 20;
+                    Log.i(TAG, "Requesting AGAIN for article list" + Integer.toString(currentPositionCategory));
+
+                    String link = CommonData.SITE_URL+"mobapp/?s_i=" + Integer.toString(START_INDEX) + "&e_i=" + Integer.toString(END_INDEX) + "&cat_i=";
+
+                    switch (currentPositionCategory){
+                        case 0:
+                            link = link + "featured";
+                            break;
+                        case 1:
+                            link = link + "spinning";
+                            break;
+                        case 2:
+                            link = link + "weaving";
+                            break;
+                        case 3:
+                            link = link + "knitting";
+                            break;
+                        case 4:
+                            link = link + "dyeing";
+                            break;
+                        case 5:
+                            link = link + "processing";
+                            break;
+                        case 6:
+                            link = link + "textile-printing";
+                            break;
+                        case 7:
+                            link = link + "garmenting";
+                            break;
+                        case 8:
+                            link = link + "corporate-news";
+                            break;
+                        case 9:
+                            link = link + "industry-news";
+                            break;
+                        case 10:
+                            link = link + "fibre";
+                            break;
+                        case 11:
+                            link = link + "finishing";
+                            break;
+                        case 12:
+                            link = link + "textile-components";
+                            break;
+                        case 13:
+                            link = link + "technical-textiles";
+                            break;
+                        case 14:
+                            link = link + "events-exhibitions";
+                            break;
+                    }
+
+                    // Start a thread again to go fetch article data
+                    new RetrieveJSON(context).execute(link);
+                }
+            });
         }
+
 
         @Override
         public void onSaveInstanceState(Bundle savedInstanceState) {

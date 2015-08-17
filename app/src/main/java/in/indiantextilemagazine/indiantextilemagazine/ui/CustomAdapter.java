@@ -111,7 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             e.printStackTrace();
         }
         viewHolder.getTextView().setText(title);
-        Picasso.with(c).load(imgURL).placeholder(R.drawable.loading).error(R.drawable.error).resize(240, 180).centerInside().into(viewHolder.getImageView());
+        Picasso.with(c).load(imgURL).placeholder(R.drawable.loading).error(R.drawable.error).resize(240, 180).into(viewHolder.getImageView());
     }
 
     // Return the size of your dataSet (invoked by the layout manager)
