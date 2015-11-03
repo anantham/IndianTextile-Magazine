@@ -138,7 +138,7 @@ public class DisplayArticle extends ActionBarActivity implements RetrieveJSON.My
         t.setText(title);
         TextView b = (TextView)findViewById(R.id.textViewBody);
         b.setText(Html.fromHtml(body));
-        TextView d = (TextView)findViewById(R.id.textViewDate);
-        d.setText(date);
+        //TextView d = (TextView)findViewById(R.id.textViewDate);
+        //d.setText(date);
     }
 }

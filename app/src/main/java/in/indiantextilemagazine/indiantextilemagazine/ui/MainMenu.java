@@ -87,11 +87,11 @@ public class MainMenu extends ActionBarActivity
         */
 
         //TODO never hardcode But this happens if 15 is clicked
-        if(position == 15){
+        if(position == 1){
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("http://www.indiantextilemagazine.in/itma-2015/"));
+            i.setData(Uri.parse("http://www.indiantextilemagazine.in/category/itma-2015-3/"));
             startActivity(i);
-            Log.i(TAG,"you sre directed to Browser");
+            Log.i(TAG,"you are directed to Browser, as u selected ITMA category");
             return;
         }
 
@@ -100,13 +100,13 @@ public class MainMenu extends ActionBarActivity
         // Start fetching content for the list
         switch (position) {
             case 0:
-                link = link + "featured";
-                break;
-            case 1:
                 link = link + "spinning";
                 break;
+            case 1:
+                link = link + "";
+                break;
             case 2:
-                link = link + "weaving";
+                link = link + "featured";
                 break;
             case 3:
                 link = link + "knitting";
@@ -143,6 +143,9 @@ public class MainMenu extends ActionBarActivity
                 break;
             case 14:
                 link = link + "events-exhibitions";
+                break;
+            case 15:
+                link = link + "weaving";
                 break;
         }
 
@@ -345,13 +348,13 @@ public class MainMenu extends ActionBarActivity
         // append slug to URL
         switch (position) {
             case 0:
-                link = link + "featured";
-                break;
-            case 1:
                 link = link + "spinning";
                 break;
+            case 1:
+                link = link + "";
+                break;
             case 2:
-                link = link + "weaving";
+                link = link + "featured";
                 break;
             case 3:
                 link = link + "knitting";
@@ -388,6 +391,9 @@ public class MainMenu extends ActionBarActivity
                 break;
             case 14:
                 link = link + "events-exhibitions";
+                break;
+            case 15:
+                link = link + "weaving";
                 break;
         }
 
@@ -639,10 +645,10 @@ public class MainMenu extends ActionBarActivity
 
                     switch (currentPositionCategory){
                         case 0:
-                            link = link + "featured";
+                            link = link + "spinning";
                             break;
                         case 1:
-                            link = link + "spinning";
+                            link = link + "featured";
                             break;
                         case 2:
                             link = link + "weaving";

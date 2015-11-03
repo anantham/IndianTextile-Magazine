@@ -7,9 +7,9 @@
     <string name="title_activity_article_list">IndianTextileMagazine</string>
 
 
-    <string name="title_section1">Featured Articles</string>
-    <string name="title_section2">Spinning</string>
-    <string name="title_section3">Weaving</string>
+    <string name="title_section1">Spinning</string>
+    <string name="title_section2">ITMA</string>
+    <string name="title_section3">Featured Articles</string>
     <string name="title_section4">Knitting</string>
     <string name="title_section5">Dyeing</string>
     <string name="title_section6">Processing</string>
@@ -22,7 +22,7 @@
     <string name="title_section13">Textile components</string>
     <string name="title_section14">Technical Textiles</string>
     <string name="title_section15">Events &amp; Exhibitions</string>
-    <string name="title_section16">ITMA</string>
+    <string name="title_section16">Weaving</string>
 
 
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
@@ -53,4 +53,5 @@
     <string name="pref_notification_summ">Get notifications whenever new featured articles are released</string>
     <string name="image">Banner image</string>
     <string name="imagearticle">Main image of the article</string>
+    <string name="masthead">app masthead</string>
 </resources>

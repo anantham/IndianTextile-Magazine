@@ -31,7 +31,8 @@ public class ConnectionDetector {
                         // THUS we shall add httpParameters for ALL network operations otherwise
                         // we will have the app crash after waiting for a long time
                         Log.i(TAG,"connected");
-                        return isConnectedMotorIndia();
+                        return true;
+                        //return isConnectedMotorIndia();
                     }
                 }
             }
